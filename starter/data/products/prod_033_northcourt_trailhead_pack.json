@@ -1,0 +1,16 @@
+{
+  "product_id": "prod_033_northcourt_trailhead_pack",
+  "name": "Northcourt Trailhead Pack",
+  "category": "bags",
+  "brand": "Northcourt",
+  "price": 84.99,
+  "description": "The Northcourt Trailhead Pack is a 24-liter backpack for players who ride to the courts. A vented shoe tunnel keeps court shoes away from clean clothes, a fleece-lined paddle sleeve holds two paddles, and a roll-out rain cover stows in the base for wet commutes.",
+  "specifications": {
+    "type": "backpack",
+    "capacity": "24 L",
+    "paddle_capacity": 2,
+    "material": "600D recycled polyester",
+    "features": "vented shoe tunnel, fleece-lined paddle sleeve, roll-out rain cover"
+  },
+  "care_instructions": "Spot clean with mild soap and water and air dry with the shoe tunnel unzipped. Do not machine wash."
+}

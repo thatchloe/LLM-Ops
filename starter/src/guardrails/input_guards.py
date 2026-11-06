@@ -37,6 +37,25 @@ INJECTION_PATTERNS: list[re.Pattern] = [
         r"\b(jailbreak\s+mode|DAN\s+mode|developer\s+mode|do\s+anything\s+now)\b",
         re.IGNORECASE,
     ),
+    # Spoofed context delimiters: closing our own <<<END_CONTEXT>>> marker
+    # (prompts/rag_system.j2) would let text pose as trusted instructions.
+    re.compile(r"<<<\s*(BEGIN|END)_CONTEXT\s*>>>", re.IGNORECASE),
+    # Chat-template control tokens from Llama-style prompt formats.
+    re.compile(r"\[/?INST\]|<<\s*/?SYS\s*>>", re.IGNORECASE),
+    # "Forget" phrasing of an instruction reset. The possessive/ordinal is
+    # required so "did I forget the care instructions?" stays legitimate.
+    re.compile(
+        r"\b(forget|erase|wipe)\s+(all\s+|everything\s+|any\s+)?(of\s+)?"
+        r"(your|previous|prior|above|earlier)\s+(previous\s+|prior\s+)?"
+        r"(instructions?|rules?|prompts?|guidelines)\b",
+        re.IGNORECASE,
+    ),
+    # Encoded-payload smuggling: decode a blob, then act on its contents.
+    re.compile(
+        r"\b(decode|decrypt|convert)\b.{0,40}\b(base64|rot13|hex)\b"
+        r".{0,60}\b(follow|execute|run|obey|do\s+what)\b",
+        re.IGNORECASE,
+    ),
 ]
 
 PII_PATTERNS: dict[str, re.Pattern] = {

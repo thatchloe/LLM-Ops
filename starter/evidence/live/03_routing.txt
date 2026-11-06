@@ -1,0 +1,9 @@
+Q: What is the weight of the Selkirk AMPED S2?
+model: gpt-4o-mini  blocked_by: None
+
+Q: Compare the Selkirk Vanguard Power Air and the JOOLA Hyperion CFS 16 for a player with arm fatigue who wants tournament-grade power.
+model: gpt-4o  blocked_by: None
+
+Q: Is the Engage Pursuit MX a forgiving choice for someone who plays casually on weekends?
+model: gpt-4o  blocked_by: None
+

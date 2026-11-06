@@ -1,0 +1,3 @@
+uv run python scripts/load_data.py
+Loading 35 products into Chroma...
+Done — 35 chunks upserted.

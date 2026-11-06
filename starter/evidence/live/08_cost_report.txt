@@ -1,0 +1,9 @@
+uv run python scripts/cost_report.py
+Records:           84
+Actual cost:       $0.1186
+Baseline (gpt-4o): $0.3293
+Savings:           $0.2107 (64.0%)
+
+Per-tier summary:
+  gpt-4o       N=  18  avg=$0.0058/query  total=$0.1051
+  gpt-4o-mini  N=  66  avg=$0.0002/query  total=$0.0134

@@ -1,0 +1,32 @@
+uv run python scripts/seed_traces.py
+Running 10 traced queries against http://localhost:8080/query ...
+  [ 1/10] HIT  What is the weight of the Selkirk AMPED S2?
+  [ 2/10] HIT  What is the weight of the Selkirk AMPED S2?
+  [ 3/10] HIT  Compare the Selkirk Vanguard Power Air and JOOLA Hyperion CFS 16 paddl
+  [ 4/10] MISS What is the difference between indoor and outdoor balls?
+  [ 5/10] MISS Which ball is best for outdoor play in windy conditions?
+  [ 6/10] MISS How much does the Franklin Sling Bag cost?
+  [ 7/10] HIT  How much does the Franklin Sling Bag cost?
+  [ 8/10] MISS How many paddles can the JOOLA Tour Elite Pro Duffel hold?
+  [ 9/10] MISS What material are the Engage Court Shorts made of?
+  [10/10] MISS Compare the moisture-wicking and durability properties of the apparel 
+Waiting 4s for span exporters to drain ...
+# Phoenix Trace Export
+
+17 trace(s) captured. Showing the most recent 10.
+
+| # | Trace ID | Question | Model | Latency (ms) | Prompt tok | Compl. tok | Slowest child | Slowest (ms) |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `b4b4389b` | Compare the moisture-wicking and durability properties of the apparel options yo | gpt-4o | 4284.3 | 1194 | 261 | ChatCompletion | 3629.2 |
+| 2 | `afdb657f` | What material are the Engage Court Shorts made of? | gpt-4o-mini | 2357.5 | 1212 | 24 | ChatCompletion | 1727.4 |
+| 3 | `5d4d865f` | How many paddles can the JOOLA Tour Elite Pro Duffel hold? | gpt-4o-mini | 10202.1 | 1336 | 23 | CreateEmbeddings | 8299.9 |
+| 4 | `a90a783e` | How much does the Franklin Sling Bag cost? | gpt-4o-mini | 2273.5 | 1165 | 14 | ChatCompletion | 1509.2 |
+| 5 | `b8850560` | Which ball is best for outdoor play in windy conditions? | gpt-4o | 2951.5 | 1145 | 73 | ChatCompletion | 2258.0 |
+| 6 | `80dd90ff` | What is the difference between indoor and outdoor balls? | gpt-4o | 4535.6 | 1135 | 293 | ChatCompletion | 3877.3 |
+| 7 | `e5b32540` | What paddle is good for beginners? | gpt-4o | 3538.8 | 1460 | 120 | ChatCompletion | 2859.9 |
+| 8 | `3704d1e9` | What care instructions come with the Northcourt Meridian 14? | gpt-4o-mini | 3787.1 | 1159 | 49 | ChatCompletion | 2879.1 |
+| 9 | `f4244866` | Can you list the installation steps for the portable net? | gpt-4o-mini | 3984.3 | 1208 | 147 | ChatCompletion | 3097.9 |
+| 10 | `4e2120c8` | Does the context of indoor play change which ball I should buy? | gpt-4o | 4387.7 | 1127 | 246 | ChatCompletion | 3680.0 |
+
+
+Slowest step across 17 traces: ChatCompletion (avg 2626ms, 69% of total request latency)

@@ -1,0 +1,33 @@
+dropped good.json
+dropped good_2.json
+dropped good_3.json
+dropped bad.json
+dropped bad_missing_price.json
+
+--- ls data/inbox/failed/
+bad.json
+bad.json.error.txt
+bad_missing_price.json
+bad_missing_price.json.error.txt
+
+--- data/inbox/failed/bad.json.error.txt
+invalid JSON: Expecting property name enclosed in double quotes: line 15 column 3 (char 619)
+--- data/inbox/failed/bad_missing_price.json.error.txt
+missing required fields: ['price']
+Q: What core does the Engage Pursuit MX Lite use?
+answer: The Engage Pursuit MX Lite uses a ControlPro polymer core.
+doc_ids: ['prod_inbox_good_001', 'prod_003', 'prod_018', 'prod_030', 'prod_029']
+
+Q: Which overgrip has a raised spiral ridge texture?
+answer: The overgrip with a raised spiral ridge texture is the **Northcourt Ridgeline Grip Tape**. Here are the details:
+
+- **Texture:** Raised spiral ridge
+- **Thickness:** 0.6 mm
+- **Wraps per pack:** 3
+
+Price: $9.99 USD.
+doc_ids: ['prod_inbox_good_002', 'prod_019', 'prod_003', 'prod_031_northcourt_meridian_14', 'prod_026']
+
+Q: Which outdoor ball resists cracking in cold weather?
+answer: The Northcourt Solstice Outdoor Ball is designed to resist cracking in cold weather. It is made from a low-temperature polymer that prevents it from becoming brittle below 45 degrees Fahrenheit [prod_inbox_good_003].
+doc_ids: ['prod_inbox_good_003', 'prod_032_northcourt_glacier_indoor', 'prod_010', 'prod_008', 'prod_011']

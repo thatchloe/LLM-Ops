@@ -27,3 +27,6 @@ WRITEUP-evidence/
 
 # Local Claude state
 .claude/
+
+# Raw server output from scripts/capture_live_evidence.sh
+evidence/live/server.log

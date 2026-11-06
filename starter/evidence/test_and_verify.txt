@@ -1,0 +1,13 @@
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+247 passed, 26 warnings in 1.39s
+
+[+] unit-tests-pass
+    Unit tests: 247 passed, 26 warnings in 1.87s
+[+] dependency-graph-forward-only
+    Forward-dependency graph: 4 passed in 0.04s
+[+] query-response-schema-complete
+    QueryResponse schema: 5 passed in 0.32s
+[+] end-to-end-wiring
+    Cross-package end-to-end: 6 passed in 0.34s
+Automated: 4 passed, 0 failed
+Manual: 12 items to verify in a real environment

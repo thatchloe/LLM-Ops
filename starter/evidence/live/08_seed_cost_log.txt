@@ -1,0 +1,2 @@
+uv run python scripts/seed_cost_log.py
+skipping — log already populated (84 entries ≥ target 50)

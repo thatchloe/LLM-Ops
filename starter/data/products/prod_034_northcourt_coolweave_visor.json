@@ -1,0 +1,16 @@
+{
+  "product_id": "prod_034_northcourt_coolweave_visor",
+  "name": "Northcourt CoolWeave Visor",
+  "category": "apparel",
+  "brand": "Northcourt",
+  "price": 27.99,
+  "description": "The Northcourt CoolWeave Visor is a lightweight sun visor for hot outdoor sessions. A wet-to-activate cooling sweatband drops the temperature against the forehead for up to two hours, and the UPF 50+ brim shades the eyes on high lobs without blocking overhead vision.",
+  "specifications": {
+    "material": "Recycled polyester mesh",
+    "fit": "Adjustable hook-and-loop strap",
+    "sun_protection": "UPF 50+",
+    "sweatband": "Wet-to-activate cooling band",
+    "color": "Slate"
+  },
+  "care_instructions": "Hand wash in cold water and air dry. Rinse the sweatband after each session so salt does not reduce the cooling effect."
+}

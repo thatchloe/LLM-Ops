@@ -1,0 +1,16 @@
+{
+  "product_id": "prod_035_northcourt_edgeguard_kit",
+  "name": "Northcourt EdgeGuard Repair Kit",
+  "category": "accessories",
+  "brand": "Northcourt",
+  "price": 12.99,
+  "description": "The Northcourt EdgeGuard Repair Kit extends the life of a chipped paddle. It includes three adhesive edge-guard strips, a two-part clear epoxy for sealing small edge cracks, and an alcohol prep pad, enough for two full paddle repairs. Note that added tape changes paddle weight by roughly 0.1 oz.",
+  "specifications": {
+    "type": "Paddle edge repair kit",
+    "contents": "3 edge-guard strips, 2-part clear epoxy, alcohol prep pad",
+    "repairs_per_kit": 2,
+    "added_weight": "about 0.1 oz",
+    "cure_time": "24 hours"
+  },
+  "care_instructions": "Clean the edge with the prep pad before applying. Let epoxy cure for 24 hours before play, and store the sealed kit in a cool, dry place."
+}

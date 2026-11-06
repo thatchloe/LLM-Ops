@@ -1,0 +1,11 @@
+{
+  "product_id": "prod_inbox_bad_002",
+  "name": "Northcourt Unpriced Paddle",
+  "category": "paddles",
+  "brand": "Northcourt",
+  "description": "Valid JSON that is missing the required price field, so the watcher must quarantine it.",
+  "specifications": {
+    "weight": "8.0 oz"
+  },
+  "care_instructions": "Standard paddle care."
+}

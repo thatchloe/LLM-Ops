@@ -1,0 +1,15 @@
+{
+  "product_id": "prod_inbox_good_002",
+  "name": "Northcourt Ridgeline Grip Tape",
+  "category": "accessories",
+  "brand": "Northcourt",
+  "price": 9.99,
+  "description": "Northcourt Ridgeline Grip Tape is a raised-spiral overgrip for players with sweaty hands. The ridged honeycomb texture keeps the handle tacky through long humid sessions, and each pack holds three wraps.",
+  "specifications": {
+    "type": "Overgrip",
+    "thickness": "0.6 mm",
+    "texture": "Raised spiral ridge",
+    "wraps_per_pack": 3
+  },
+  "care_instructions": "Wipe with a dry towel after play. Replace when the ridges flatten."
+}

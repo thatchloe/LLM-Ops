@@ -13,19 +13,21 @@ This starter is the scaffold. Each layer is wired in but kept small and readable
 
 ## Quick Start
 
+Run these from the `starter/` directory.
+
 ```bash
-# 1. Install dependencies (uv-managed virtualenv)
+# 1. Load/install dependencies (uv-managed virtualenv, pre-installed on Udacity workspace)
 make setup
 
-# 2. Load the seed product corpus into Chroma (writes to data/chroma/)
-make load-data
-
-# 3. Copy and edit credentials
+# 2. Copy and edit credentials
 cp .env.example .env       # then fill in OPENAI_API_KEY (Phoenix tracing runs locally — no signup)
 
+# 3. Load the seed product corpus into Chroma (writes to data/chroma/)
+make load-data
+
 # 4. Run the API
-make serve                  # http://localhost:8080
-# Udacity Workspace? Use `make serve-proxy` instead so /docs loads in the browser.
+make serve-proxy            # Udacity Workspace: hosted at http://localhost:8080, /docs loads in the browser
+make serve                  # Local environment: hosted at http://localhost:8080
 ```
 
 Smoke-test it:

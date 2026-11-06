@@ -1,0 +1,16 @@
+{
+  "product_id": "prod_032_northcourt_glacier_indoor",
+  "name": "Northcourt Glacier Indoor Ball",
+  "category": "balls",
+  "brand": "Northcourt",
+  "price": 17.99,
+  "description": "The Northcourt Glacier Indoor Ball is a 26-hole indoor ball made for gym floors and community-center courts. Its softer TPE blend gives a quieter, lower bounce that lengthens rallies, and the ice-blue color stays visible against wood floors and bright overhead lighting.",
+  "specifications": {
+    "hole_count": 26,
+    "weight": "0.82 oz",
+    "material": "Soft TPE blend",
+    "color": "Ice blue",
+    "pack_size": 6
+  },
+  "care_instructions": "Store at room temperature out of direct sunlight. Replace a ball once it goes soft or develops flat spots, typically after 20 to 30 hours of indoor play."
+}

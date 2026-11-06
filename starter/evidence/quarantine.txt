@@ -1,0 +1,15 @@
+$ ls data/inbox/failed/
+bad.json
+bad.json.error.txt
+bad_missing_price.json
+bad_missing_price.json.error.txt
+
+$ cat data/inbox/failed/bad.json.error.txt
+invalid JSON: Expecting property name enclosed in double quotes: line 15 column 3 (char 619)
+
+$ cat data/inbox/failed/bad_missing_price.json.error.txt
+missing required fields: ['price']
+
+$ ls data/inbox/
+.gitkeep
+failed

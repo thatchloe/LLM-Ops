@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cost Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    table { border-collapse: collapse; margin-top: 1rem; }
+    th, td { padding: 0.4rem 0.8rem; border: 1px solid #ddd; text-align: left; }
+    th { background: #f5f5f5; }
+    h1 { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <h1>Cost Dashboard</h1>
+  <p>Aggregate cost data from the local JSONL request log.</p>
+  <table>
+    <tr><th>Total requests</th><td>84</td></tr>
+    <tr><th>Total cost (USD)</th><td>$0.1186</td></tr>
+  </table>
+  <h2>Per-model breakdown</h2>
+  <table>
+    <thead>
+      <tr><th>Model</th><th>Requests</th><th>Cost (USD)</th><th>Avg cost / request</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>gpt-4o</td><td>18</td><td>$0.1051</td><td>$0.005840</td></tr><tr><td>gpt-4o-mini</td><td>66</td><td>$0.0134</td><td>$0.000204</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

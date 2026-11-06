@@ -1,0 +1,16 @@
+{
+  "product_id": "prod_inbox_good_003",
+  "name": "Northcourt Solstice Outdoor Ball",
+  "category": "balls",
+  "brand": "Northcourt",
+  "price": 21.99,
+  "description": "The Northcourt Solstice Outdoor Ball is a 40-hole, rotationally molded outdoor ball tuned for cold-weather play. Its low-temperature polymer resists cracking below 45 degrees Fahrenheit, which is when most outdoor balls turn brittle.",
+  "specifications": {
+    "hole_count": 40,
+    "weight": "0.92 oz",
+    "material": "Low-temperature polymer",
+    "color": "Sunset orange",
+    "pack_size": 4
+  },
+  "care_instructions": "Store indoors between sessions. Warm the ball in a pocket before play on cold days."
+}

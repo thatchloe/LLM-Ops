@@ -1,0 +1,19 @@
+{
+  "product_id": "prod_031_northcourt_meridian_14",
+  "name": "Northcourt Meridian 14",
+  "category": "paddles",
+  "brand": "Northcourt",
+  "price": 149.99,
+  "description": "The Northcourt Meridian 14 is a control-first paddle built around a basalt-fiber face, a material that damps vibration more than carbon or fiberglass and suits players recovering from tennis elbow. A 14 mm polypropylene honeycomb core keeps the feel soft at the kitchen line, and the hybrid shape balances reach with a forgiving sweet spot.",
+  "specifications": {
+    "weight": "7.9 oz",
+    "grip_size": "4.25 in",
+    "face_material": "Woven basalt fiber",
+    "core": "14 mm polypropylene honeycomb",
+    "shape": "hybrid",
+    "length": "16.0 in",
+    "width": "7.75 in",
+    "handle_length": "5.25 in"
+  },
+  "care_instructions": "Wipe the basalt face with a damp cloth after play and let it air dry. Avoid solvents, and store the paddle in a cover away from direct heat."
+}
