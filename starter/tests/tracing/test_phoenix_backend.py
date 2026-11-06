@@ -66,7 +66,7 @@ def _attrs(span) -> dict:
 
 
 def test_decorator_creates_spans_and_returns_response_with_trace_id():
-    tracer, root_span, gen_span = _build_mock_tracer()
+    tracer, root_span, _gen_span = _build_mock_tracer()
 
     with patch(
         "src.tracing.phoenix_backend.otel_trace.get_tracer",
@@ -82,11 +82,11 @@ def test_decorator_creates_spans_and_returns_response_with_trace_id():
     assert result.trace_id == format(0xABCDEF1234567890ABCDEF1234567890, "032x")
     assert result.answer == "Selkirk weighs 7.8 oz."
 
-    # Two spans started, in the right order
+    # Only the wrapper span: generation is timed inside run_pipeline
     span_names = [
         c.args[0] for c in tracer.start_as_current_span.call_args_list
     ]
-    assert span_names == ["rag_query", "rag_generation"]
+    assert span_names == ["rag_query"]
 
     # Root span carries the RAG-level metadata
     root_attrs = _attrs(root_span)
@@ -99,14 +99,6 @@ def test_decorator_creates_spans_and_returns_response_with_trace_id():
     assert root_attrs["rag.latency_ms"] >= 0
     # kwargs flowed through as rag.input.* attributes
     assert root_attrs["rag.input.model"] == "gpt-4o-mini"
-
-    # Generation child span carries token + model attributes
-    gen_attrs = _attrs(gen_span)
-    assert gen_attrs["llm.model_name"] == "gpt-4o-mini"
-    assert gen_attrs["output.value"] == "Selkirk weighs 7.8 oz."
-    assert gen_attrs["llm.token_count.prompt"] == 100
-    assert gen_attrs["llm.token_count.completion"] == 20
-    assert gen_attrs["llm.token_count.total"] == 120
 
 
 def test_decorator_records_error_and_reraises():

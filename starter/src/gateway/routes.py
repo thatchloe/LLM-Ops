@@ -26,6 +26,7 @@ from src.guardrails.wrapper import (
     _safe_response,
 )
 from src.models import QueryResponse
+from src.tracing import trace_span
 
 router = APIRouter()
 
@@ -84,23 +85,33 @@ async def query(request: QueryRequest) -> QueryResponse:
     Standalone wrappers (``guarded_route_query`` in ``src.guardrails`` and
     ``cached_route_query`` in ``src.cache``) compose the same pieces in
     isolation; they remain for tests and module-by-module exploration.
+
+    The ``query_request`` span makes every layer part of one trace. Its
+    input is set only after redaction, so raw PII never reaches tracing.
     """
-    if reason := detect_prompt_injection(request.question):
-        return _safe_response(SAFE_BLOCKED_MESSAGE, blocked_by=reason)
-    cleaned, pii_found = detect_pii(request.question)
+    with trace_span("query_request") as root:
+        with trace_span("input_guards"):
+            if reason := detect_prompt_injection(request.question):
+                return _safe_response(SAFE_BLOCKED_MESSAGE, blocked_by=reason)
+            cleaned, pii_found = detect_pii(request.question)
+        root.set_attribute("input.value", cleaned)
 
-    if cached := cache_lookup(cleaned):
-        return _annotate_pii(cached, pii_found)
+        with trace_span("cache_lookup"):
+            cached = cache_lookup(cleaned)
+        if cached:
+            return _annotate_pii(cached, pii_found)
 
-    response = route_query(cleaned, top_k=request.top_k)
+        response = route_query(cleaned, top_k=request.top_k)
 
-    if reason := check_hallucination(response.answer, response.sources):
-        return _safe_response(SAFE_FILTERED_MESSAGE, blocked_by=reason)
-    if reason := is_off_topic(response.answer):
-        return _safe_response(SAFE_FILTERED_MESSAGE, blocked_by=reason)
+        with trace_span("output_guards"):
+            if reason := check_hallucination(response.answer, response.sources):
+                return _safe_response(SAFE_FILTERED_MESSAGE, blocked_by=reason)
+            if reason := is_off_topic(response.answer):
+                return _safe_response(SAFE_FILTERED_MESSAGE, blocked_by=reason)
 
-    cache_store(cleaned, response)
-    return _annotate_pii(response, pii_found)
+        with trace_span("cache_store"):
+            cache_store(cleaned, response)
+        return _annotate_pii(response, pii_found)
 
 
 @router.get("/health")

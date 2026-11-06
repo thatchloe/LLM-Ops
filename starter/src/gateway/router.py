@@ -9,7 +9,7 @@ from src.config import settings
 from src.cost.tracker import log_request
 from src.gateway.classifier import QueryType, classify
 from src.models import QueryResponse
-from src.tracing import traced_pipeline
+from src.tracing import trace_span, traced_pipeline
 
 
 def select_model(query_type: QueryType) -> str:
@@ -19,7 +19,9 @@ def select_model(query_type: QueryType) -> str:
 
 def route_query(question: str, top_k: int = 5) -> QueryResponse:
     """Full request flow: classify, dispatch, trace, log."""
-    query_type = classify(question)
+    with trace_span("classification") as span:
+        query_type = classify(question)
+        span.set_attribute("rag.query_type", query_type)
     model = select_model(query_type)
     response = traced_pipeline(question, model=model, top_k=top_k)
     log_request(model, response.tokens, response.cost_usd, query_type)

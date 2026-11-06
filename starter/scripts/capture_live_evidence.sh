@@ -108,6 +108,11 @@ EOF
 log "Task 7: traces"
 make seed-traces 2>&1 | tee "$OUT/07_seed_traces.txt"
 make show-traces 2>&1 | tee "$OUT/07_show_traces.txt"
+# One complete request with a question that cannot be a cache hit.
+trace_id=$(ask "Compare every paddle under \$150 for a beginner, run at $(date +%s)" | field trace_id)
+sleep 5
+PYTHONPATH=. uv run python scripts/show_traces.py --trace "$trace_id" 2>/dev/null |
+  tee "$OUT/07_single_trace.txt"
 
 log "Task 8: cost"
 make seed-cost-log 2>&1 | tee "$OUT/08_seed_cost_log.txt"

@@ -7,7 +7,10 @@ tests that want to exercise the request flow without span machinery.
 """
 
 import functools
-from typing import Callable
+from contextlib import contextmanager
+from typing import Callable, Iterator
+
+from opentelemetry import trace as otel_trace
 
 from src.models import QueryResponse
 from src.rag import run_pipeline
@@ -19,6 +22,11 @@ def init_tracing() -> None:
 
 def flush() -> None:
     return None
+
+
+@contextmanager
+def trace_span(name: str) -> Iterator[otel_trace.Span]:
+    yield otel_trace.INVALID_SPAN
 
 
 def trace_rag_query(

@@ -7,9 +7,9 @@ The active backend is chosen at import time from ``settings.tracing_backend``:
 - ``none`` — pass-through, no spans recorded. Useful for tests, CI,
   or any environment where the in-process Phoenix UI isn't wanted.
 
-Each backend module exports the same four names; this module re-exports
+Each backend module exports the same five names; this module re-exports
 the active backend's symbols so the rest of the codebase imports
-``traced_pipeline``, ``flush``, ``init_tracing`` (and the
+``traced_pipeline``, ``trace_span``, ``flush``, ``init_tracing`` (and the
 ``trace_rag_query`` decorator for advanced use) without caring which
 backend is on the other end.
 
@@ -26,6 +26,7 @@ if settings.tracing_backend == "none":
         flush,
         init_tracing,
         trace_rag_query,
+        trace_span,
         traced_pipeline,
     )
 else:  # "phoenix" (default) — covers any unrecognised value too
@@ -33,8 +34,9 @@ else:  # "phoenix" (default) — covers any unrecognised value too
         flush,
         init_tracing,
         trace_rag_query,
+        trace_span,
         traced_pipeline,
     )
 
 
-__all__ = ["init_tracing", "flush", "trace_rag_query", "traced_pipeline"]
+__all__ = ["init_tracing", "flush", "trace_rag_query", "trace_span", "traced_pipeline"]

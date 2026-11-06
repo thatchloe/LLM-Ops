@@ -9,6 +9,7 @@ Usage:
     uv run python scripts/show_traces.py                       # markdown
     uv run python scripts/show_traces.py --last 20             # last 20
     uv run python scripts/show_traces.py --json                # JSON
+    uv run python scripts/show_traces.py --trace 4e2120c8      # one trace's stages
     uv run python scripts/show_traces.py --output traces.md    # write file
 
 Or via the Makefile shortcut:
@@ -23,6 +24,7 @@ from src.config import settings
 from src.tracing.trace_export import (
     render_json,
     render_markdown,
+    render_trace_detail,
     summarize_traces,
 )
 
@@ -84,6 +86,11 @@ def main(argv: list[str] | None = None) -> int:
         type=str,
         help="Write the output to a file instead of stdout.",
     )
+    parser.add_argument(
+        "--trace",
+        type=str,
+        help="Show per-stage latency for one trace ID (or ID prefix).",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -97,11 +104,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Is `make serve` running? Error: {exc}", file=sys.stderr)
         return 1
 
-    summaries = summarize_traces(df, last_n=args.last)
-    total = 0 if df is None else len(df.groupby("context.trace_id"))
-    output = (
-        render_json(summaries) if args.json else render_markdown(summaries, total)
-    )
+    if args.trace:
+        output = render_trace_detail(df, args.trace)
+    else:
+        summaries = summarize_traces(df, last_n=args.last)
+        total = 0 if df is None else len(df.groupby("context.trace_id"))
+        output = (
+            render_json(summaries) if args.json else render_markdown(summaries, total)
+        )
 
     if args.output:
         Path(args.output).write_text(output)

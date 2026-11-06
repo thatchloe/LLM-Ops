@@ -1,0 +1,17 @@
+{
+  "product_id": "prod_inbox_bad_001",
+  "name": "Mystery Paddle",
+  "category": "paddles",
+  "brand": "Unknown",
+  "description": "This product JSON is deliberately malformed for the §4 watcher exercise. It is missing the required `price` field AND has a trailing comma that makes it invalid JSON. The watcher should move it to data/inbox/failed/ with a sibling .error.txt explaining why.",
+  "specifications": {
+    "weight": "7.9 oz",
+    "grip_size": "4.25 in",
+    "face_material": "Carbon fiber",
+    "core": "Polypropylene honeycomb",
+    "shape": "widebody",
+    "length": "15.75 in",
+    "width": "8.0 in",
+  },
+  "care_instructions": "Standard paddle care."
+}

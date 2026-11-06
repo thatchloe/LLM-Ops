@@ -11,12 +11,11 @@ __pycache__/
 # Local on-disk data stores written by the starter at runtime
 data/chroma/
 data/phoenix/
-data/cost_log.jsonl
 
-# Runtime inbox — file-watcher input + quarantine. Keep the directory
-# (via .gitkeep) but ignore any fixtures dropped in during dry runs.
+# Runtime inbox: keep the directory (via .gitkeep) but ignore fixtures
+# dropped in during dry runs. data/inbox/failed/ and data/cost_log.jsonl
+# stay tracked because they are required submission evidence.
 data/inbox/*.json
-data/inbox/failed/
 
 # Operator runtime artifacts from `make harvest-evidence`
 WRITEUP-draft.md

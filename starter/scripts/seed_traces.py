@@ -22,7 +22,7 @@ import time
 import httpx
 
 from src.config import settings
-from src.tracing.trace_export import render_markdown, summarize_traces
+from src.tracing.trace_export import STAGE_SPANS, render_markdown, summarize_traces
 
 HEALTH_URL = "http://localhost:8080/health"
 QUERY_URL = "http://localhost:8080/query"
@@ -100,20 +100,17 @@ def _fetch_spans():
         )
 
 
-def _only_rag_query_traces(df):
-    """Restrict df to spans whose trace_id has a `rag_query` root span.
+def _only_request_traces(df):
+    """Restrict df to spans whose trace_id has a `query_request` root span.
 
-    Phoenix captures every OpenAI sub-call as its own trace (embedding
-    requests, judge calls), so the raw dataframe contains many noisy
-    "traces" that summarize_traces would render alongside the real
-    request roots. Filtering here keeps the existing summarize_traces
-    fallback intact while ensuring the rendered table only shows the
-    full /query journey.
+    OpenAI calls made outside a request (such as inbox ingestion) and traces
+    recorded before the root span existed are left out, so the rendered
+    table only shows the full /query journey.
     """
     if df is None or len(df) == 0:
         return df
-    rag_trace_ids = set(df.loc[df["name"] == "rag_query", "context.trace_id"])
-    return df[df["context.trace_id"].isin(rag_trace_ids)]
+    request_ids = set(df.loc[df["name"] == "query_request", "context.trace_id"])
+    return df[df["context.trace_id"].isin(request_ids)]
 
 
 def _slowest_step_across_traces(df) -> str:
@@ -127,10 +124,10 @@ def _slowest_step_across_traces(df) -> str:
     if df is None or len(df) == 0:
         return "Slowest step across 0 traces: (no spans captured — check Phoenix tracer)"
 
-    children = df[df["name"] != "rag_query"].copy()
-    roots = df[df["name"] == "rag_query"]
+    children = df[df["name"].isin(STAGE_SPANS)].copy()
+    roots = df[df["name"] == "query_request"]
     if len(children) == 0 or len(roots) == 0:
-        return "Slowest step across 0 traces: (no rag_query spans found)"
+        return "Slowest step across 0 traces: (no query_request spans found)"
 
     children["_dur_ms"] = (
         (children["end_time"] - children["start_time"]).dt.total_seconds() * 1000
@@ -167,7 +164,7 @@ def main() -> int:
     time.sleep(SPAN_FLUSH_WAIT_S)
 
     df = _fetch_spans()
-    df_rag = _only_rag_query_traces(df)
+    df_rag = _only_request_traces(df)
     summaries = summarize_traces(df_rag, last_n=len(QUESTIONS))
     total_traces = 0 if df_rag is None else len(df_rag.groupby("context.trace_id"))
 

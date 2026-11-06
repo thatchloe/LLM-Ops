@@ -6,10 +6,13 @@ signup. ``phoenix.otel.register(...)`` then registers an OpenTelemetry
 ``TracerProvider`` so spans are exported to that Phoenix instance, and
 ``OpenAIInstrumentor`` auto-traces every OpenAI SDK call.
 
-The decorator emits a root ``rag_query`` span carrying RAG metadata
-(latency, confidence, cost, top_k, model) plus a child ``rag_generation``
-span carrying token counts and the answer text. The trace_id (32-char
-hex) is injected back into the returned ``QueryResponse``.
+``POST /query`` opens a ``query_request`` root span, so every stage of a
+request shares one trace. ``trace_span`` creates the stage spans. The
+decorator emits a ``rag_query`` span carrying RAG metadata (latency,
+confidence, cost, top_k, model) around ``rag_retrieval`` and
+``rag_generation``, which ``src.rag.pipeline`` opens around the real calls.
+The trace_id (32-char hex) is injected back into the returned
+``QueryResponse``.
 
 When tracing is uninitialised (e.g. during tests, before ``init_tracing``
 runs), OpenTelemetry returns a no-op tracer; the decorator still runs,
@@ -19,7 +22,8 @@ spans are dropped silently, and ``trace_id`` is ``None``.
 import functools
 import os
 import time
-from typing import Callable
+from contextlib import contextmanager
+from typing import Callable, Iterator
 
 from opentelemetry import trace as otel_trace
 from opentelemetry.trace import Status, StatusCode
@@ -85,6 +89,14 @@ def _set_str_attr(span, key: str, value) -> None:
         span.set_attribute(key, str(value))
 
 
+@contextmanager
+def trace_span(name: str) -> Iterator[otel_trace.Span]:
+    """Open a span in the current trace; a root span if there is none."""
+    tracer = otel_trace.get_tracer("src.tracing.phoenix_backend")
+    with tracer.start_as_current_span(name) as span:
+        yield span
+
+
 def trace_rag_query(
     fn: Callable[..., QueryResponse],
 ) -> Callable[..., QueryResponse]:
@@ -107,22 +119,6 @@ def trace_rag_query(
                 raise
 
             latency_ms = (time.perf_counter() - start) * 1000
-
-            with tracer.start_as_current_span("rag_generation") as gen:
-                gen.set_attribute("llm.model_name", response.model)
-                gen.set_attribute("input.value", question)
-                gen.set_attribute("output.value", response.answer)
-                gen.set_attribute(
-                    "llm.token_count.prompt", response.tokens.prompt_tokens
-                )
-                gen.set_attribute(
-                    "llm.token_count.completion",
-                    response.tokens.completion_tokens,
-                )
-                gen.set_attribute(
-                    "llm.token_count.total", response.tokens.total
-                )
-                gen.set_attribute("rag.cost_usd", response.cost_usd)
 
             span.set_attribute("output.value", response.answer)
             span.set_attribute("rag.latency_ms", latency_ms)

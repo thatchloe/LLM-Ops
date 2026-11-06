@@ -14,6 +14,19 @@ import math
 from typing import Any
 
 
+# Top-level pipeline stages, in request order. Auto-instrumented OpenAI
+# spans nest inside these, so comparing stages avoids double counting.
+STAGE_SPANS: tuple[str, ...] = (
+    "input_guards",
+    "cache_lookup",
+    "classification",
+    "rag_retrieval",
+    "rag_generation",
+    "output_guards",
+    "cache_store",
+)
+
+
 def _safe_int(value: Any) -> int:
     """Coerce a possibly-NaN/None pandas scalar to int. Defaults to 0.
 
@@ -44,14 +57,18 @@ def summarize_traces(df: Any, last_n: int) -> list[dict]:
 
     summaries: list[dict] = []
     for trace_id, group in df.groupby("context.trace_id"):
-        root = group[group["name"] == "rag_query"]
+        root = group[group["name"] == "query_request"]
+        if len(root) == 0:
+            root = group[group["name"] == "rag_query"]
         if len(root) == 0:
             root = group[group["parent_id"].isna()]
         if len(root) == 0:
             continue
         root_row = root.iloc[0]
 
-        children = group[group["name"] != "rag_query"]
+        children = group[group["name"].isin(STAGE_SPANS)]
+        if len(children) == 0:
+            children = group[group["name"] != "rag_query"]
         if len(children) > 0:
             children = children.copy()
             children["_dur_ms"] = (
@@ -71,9 +88,21 @@ def summarize_traces(df: Any, last_n: int) -> list[dict]:
         # `row["attributes.rag.latency_ms"]` is a missing-column read
         # that silently returns the fallback. The values live inside the
         # dict at `row["attributes.rag"]`.
-        rag_attrs = root_row.get("attributes.rag") or {}
+        rag_rows = group[group["name"] == "rag_query"]
+        rag_row = rag_rows.iloc[0] if len(rag_rows) > 0 else root_row
+        rag_attrs = rag_row.get("attributes.rag") or {}
         if not isinstance(rag_attrs, dict):  # NaN-as-float guard
             rag_attrs = {}
+
+        # A query_request root spans the complete request, so its own
+        # duration is the request latency. rag.latency_ms covers only the
+        # pipeline portion.
+        if root_row["name"] == "query_request":
+            latency_ms = (
+                root_row["end_time"] - root_row["start_time"]
+            ).total_seconds() * 1000
+        else:
+            latency_ms = float(rag_attrs.get("latency_ms", 0) or 0)
 
         # Token counts are set on the `rag_generation` child span (see
         # src/tracing/phoenix_backend.py), not on the rag_query root.
@@ -94,9 +123,7 @@ def summarize_traces(df: Any, last_n: int) -> list[dict]:
                     root_row.get("attributes.input.value", "—")
                 )[:80],
                 "model": str(rag_attrs.get("model", "—")),
-                "latency_ms": round(
-                    float(rag_attrs.get("latency_ms", 0) or 0), 1
-                ),
+                "latency_ms": round(latency_ms, 1),
                 "prompt_tokens": prompt_tok,
                 "completion_tokens": completion_tok,
                 "slowest_span": slowest_name,
@@ -135,6 +162,54 @@ def render_markdown(summaries: list[dict], total: int) -> str:
             f"{s['prompt_tokens']} | {s['completion_tokens']} | "
             f"{s['slowest_span']} | {s['slowest_ms']} |"
         )
+    return "\n".join(lines) + "\n"
+
+
+def render_trace_detail(df: Any, trace_id: str) -> str:
+    """Render one trace's stages with each stage's share of the request.
+
+    ``trace_id`` may be a prefix. Stage percentages use the ``query_request``
+    root's duration, so they are shares of the complete request.
+    """
+    if df is None or len(df) == 0:
+        return f"No spans found for trace `{trace_id}`.\n"
+    spans = df[df["context.trace_id"].astype(str).str.startswith(trace_id)]
+    root = spans[spans["name"] == "query_request"]
+    if len(root) == 0:
+        return f"No `query_request` span found for trace `{trace_id}`.\n"
+    root_row = root.iloc[0]
+    total_ms = (root_row["end_time"] - root_row["start_time"]).total_seconds() * 1000
+
+    stages = spans[spans["name"].isin(STAGE_SPANS)].sort_values("start_time")
+    lines = [
+        f"# Trace `{root_row['context.trace_id']}`",
+        "",
+        f"Question: {root_row.get('attributes.input.value', '—')}",
+        "",
+        f"Complete request (`query_request`): {total_ms:.1f} ms",
+        "",
+        "| Stage | Duration (ms) | Share of request | Prompt tok | Compl. tok |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for _, row in stages.iterrows():
+        ms = (row["end_time"] - row["start_time"]).total_seconds() * 1000
+        prompt = _safe_int(row.get("attributes.llm.token_count.prompt", 0))
+        completion = _safe_int(row.get("attributes.llm.token_count.completion", 0))
+        lines.append(
+            f"| {row['name']} | {ms:.1f} | {ms / total_ms:.1%} | "
+            f"{prompt} | {completion} |"
+        )
+
+    if len(stages) > 0:
+        durations = (
+            stages["end_time"] - stages["start_time"]
+        ).dt.total_seconds() * 1000
+        slowest = stages.loc[durations.idxmax()]
+        lines += [
+            "",
+            f"Slowest stage: {slowest['name']} ({durations.max():.1f} ms, "
+            f"{durations.max() / total_ms:.1%} of the complete request)",
+        ]
     return "\n".join(lines) + "\n"
 
 
