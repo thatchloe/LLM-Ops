@@ -1,32 +1,20 @@
 uv run python scripts/seed_traces.py
-Running 10 traced queries against http://localhost:8080/query ...
-  [ 1/10] MISS What is the weight of the Selkirk AMPED S2?
-  [ 2/10] HIT  What is the weight of the Selkirk AMPED S2?
-  [ 3/10] MISS Compare the Selkirk Vanguard Power Air and JOOLA Hyperion CFS 16 paddl
-  [ 4/10] MISS What is the difference between indoor and outdoor balls?
-  [ 5/10] MISS Which ball is best for outdoor play in windy conditions?
-  [ 6/10] MISS How much does the Franklin Sling Bag cost?
-  [ 7/10] HIT  How much does the Franklin Sling Bag cost?
-  [ 8/10] MISS How many paddles can the JOOLA Tour Elite Pro Duffel hold?
-  [ 9/10] MISS What material are the Engage Court Shorts made of?
-  [10/10] MISS Compare the moisture-wicking and durability properties of the apparel 
-Waiting 4s for span exporters to drain ...
 # Phoenix Trace Export
 
 10 trace(s) captured. Showing the most recent 10.
 
 | # | Trace ID | Question | Model | Latency (ms) | Prompt tok | Compl. tok | Slowest child | Slowest (ms) |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `1b2dd2b3` | Compare the moisture-wicking and durability properties of the apparel options yo | gpt-4o | 13173.7 | 1194 | 280 | rag_generation | 4455.6 |
-| 2 | `0f885436` | What material are the Engage Court Shorts made of? | gpt-4o-mini | 9997.4 | 1212 | 25 | classification | 2594.4 |
-| 3 | `937887e9` | How many paddles can the JOOLA Tour Elite Pro Duffel hold? | gpt-4o-mini | 7481.9 | 1336 | 23 | output_guards | 2038.2 |
-| 4 | `6140db79` | How much does the Franklin Sling Bag cost? | — | 1079.2 | 0 | 0 | cache_lookup | 677.0 |
-| 5 | `6f6b0b04` | How much does the Franklin Sling Bag cost? | gpt-4o-mini | 12352.8 | 1165 | 14 | output_guards | 5031.6 |
-| 6 | `0fb943f1` | Which ball is best for outdoor play in windy conditions? | gpt-4o | 9228.9 | 1145 | 86 | rag_generation | 2231.3 |
-| 7 | `5158e53a` | What is the difference between indoor and outdoor balls? | gpt-4o | 11471.3 | 1135 | 337 | rag_generation | 4358.2 |
-| 8 | `5654d012` | Compare the Selkirk Vanguard Power Air and JOOLA Hyperion CFS 16 paddles for tou | gpt-4o | 11764.5 | 1449 | 334 | rag_generation | 3853.4 |
-| 9 | `292fcdc8` | What is the weight of the Selkirk AMPED S2? | — | 1148.4 | 0 | 0 | cache_lookup | 741.2 |
-| 10 | `0a183e0c` | What is the weight of the Selkirk AMPED S2? | gpt-4o-mini | 9656.7 | 1528 | 15 | output_guards | 2301.5 |
+| 1 | `7ca47eda` | Compare the moisture-wicking and durability properties of the apparel options yo | gpt-4o | 11744.0 | 1194 | 250 | rag_generation | 4486.9 |
+| 2 | `2c71cf95` | What material are the Engage Court Shorts made of? | gpt-4o-mini | 8239.5 | 1212 | 24 | output_guards | 2108.1 |
+| 3 | `8e34ddd7` | How many paddles can the JOOLA Tour Elite Pro Duffel hold? | gpt-4o-mini | 8261.0 | 1336 | 23 | output_guards | 2413.6 |
+| 4 | `b174d5a0` | How much does the Franklin Sling Bag cost? | — | 1031.1 | 0 | 0 | cache_lookup | 662.1 |
+| 5 | `1100c388` | How much does the Franklin Sling Bag cost? | gpt-4o-mini | 8398.2 | 1165 | 14 | classification | 2310.1 |
+| 6 | `482818c2` | Which ball is best for outdoor play in windy conditions? | gpt-4o | 9435.0 | 1145 | 165 | rag_generation | 2526.6 |
+| 7 | `d4932a35` | What is the difference between indoor and outdoor balls? | gpt-4o | 11218.3 | 1135 | 279 | rag_generation | 3797.3 |
+| 8 | `1c29f26e` | Compare the Selkirk Vanguard Power Air and JOOLA Hyperion CFS 16 paddles for tou | gpt-4o | 12280.5 | 1449 | 456 | rag_generation | 4531.5 |
+| 9 | `007395f0` | What is the weight of the Selkirk AMPED S2? | — | 1005.3 | 0 | 0 | cache_lookup | 630.7 |
+| 10 | `92e797c1` | What is the weight of the Selkirk AMPED S2? | gpt-4o-mini | 9675.8 | 1528 | 18 | output_guards | 2006.5 |
 
 
-Slowest step across 10 traces: output_guards (avg 2818ms, 32% of total request latency)
+Slowest step across 10 traces: rag_generation (avg 2787ms, 34% of total request latency)

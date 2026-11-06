@@ -1,0 +1,4 @@
+
+| top_k | faithfulness | answer_relevancy | context_recall | context_precision |
+|-------|--------------|------------------|----------------|-------------------|
+| 10 | 0.889 | 0.851 | 0.894 | 0.708 |

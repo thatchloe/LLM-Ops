@@ -1,18 +1,18 @@
 uv run python scripts/show_traces.py
 # Phoenix Trace Export
 
-91 trace(s) captured. Showing the most recent 10.
+11 trace(s) captured. Showing the most recent 10.
 
 | # | Trace ID | Question | Model | Latency (ms) | Prompt tok | Compl. tok | Slowest child | Slowest (ms) |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `c1a36445` | {"input": ["Compare the moisture-wicking and durability properties of the appare | — | 0.0 | 0 | 0 | CreateEmbeddings | 1064.6 |
-| 2 | `b398222d` | {"messages": [{"role": "user", "content": "You are a fact-checking judge for a c | — | 0.0 | 0 | 0 | ChatCompletion | 1758.9 |
-| 3 | `b4b4389b` | Compare the moisture-wicking and durability properties of the apparel options yo | gpt-4o | 4284.3 | 1194 | 261 | ChatCompletion | 3629.2 |
-| 4 | `cdab924a` | {"messages": [{"role": "user", "content": "Classify the following customer query | — | 0.0 | 0 | 0 | ChatCompletion | 1777.1 |
-| 5 | `b55f495a` | {"input": ["Compare the moisture-wicking and durability properties of the appare | — | 0.0 | 0 | 0 | CreateEmbeddings | 624.9 |
-| 6 | `155394aa` | {"input": ["What material are the Engage Court Shorts made of?"], "model": "text | — | 0.0 | 0 | 0 | CreateEmbeddings | 657.6 |
-| 7 | `2b29c059` | {"messages": [{"role": "user", "content": "You are a fact-checking judge for a c | — | 0.0 | 0 | 0 | ChatCompletion | 1468.4 |
-| 8 | `afdb657f` | What material are the Engage Court Shorts made of? | gpt-4o-mini | 2357.5 | 1212 | 24 | ChatCompletion | 1727.4 |
-| 9 | `baf84bb4` | {"messages": [{"role": "user", "content": "Classify the following customer query | — | 0.0 | 0 | 0 | ChatCompletion | 1738.6 |
-| 10 | `7a82d855` | {"input": ["What material are the Engage Court Shorts made of?"], "model": "text | — | 0.0 | 0 | 0 | CreateEmbeddings | 582.8 |
+| 1 | `80f4f598` | Compare the Northcourt Meridian 14 and the Selkirk AMPED S2 for a player with te | gpt-4o | 10504.9 | 1309 | 241 | rag_generation | 3534.9 |
+| 2 | `7ca47eda` | Compare the moisture-wicking and durability properties of the apparel options yo | gpt-4o | 11744.0 | 1194 | 250 | rag_generation | 4486.9 |
+| 3 | `2c71cf95` | What material are the Engage Court Shorts made of? | gpt-4o-mini | 8239.5 | 1212 | 24 | output_guards | 2108.1 |
+| 4 | `8e34ddd7` | How many paddles can the JOOLA Tour Elite Pro Duffel hold? | gpt-4o-mini | 8261.0 | 1336 | 23 | output_guards | 2413.6 |
+| 5 | `b174d5a0` | How much does the Franklin Sling Bag cost? | — | 1031.1 | 0 | 0 | cache_lookup | 662.1 |
+| 6 | `1100c388` | How much does the Franklin Sling Bag cost? | gpt-4o-mini | 8398.2 | 1165 | 14 | classification | 2310.1 |
+| 7 | `482818c2` | Which ball is best for outdoor play in windy conditions? | gpt-4o | 9435.0 | 1145 | 165 | rag_generation | 2526.6 |
+| 8 | `d4932a35` | What is the difference between indoor and outdoor balls? | gpt-4o | 11218.3 | 1135 | 279 | rag_generation | 3797.3 |
+| 9 | `1c29f26e` | Compare the Selkirk Vanguard Power Air and JOOLA Hyperion CFS 16 paddles for tou | gpt-4o | 12280.5 | 1449 | 456 | rag_generation | 4531.5 |
+| 10 | `007395f0` | What is the weight of the Selkirk AMPED S2? | — | 1005.3 | 0 | 0 | cache_lookup | 630.7 |
 

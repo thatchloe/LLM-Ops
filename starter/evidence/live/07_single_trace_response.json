@@ -1,0 +1,40 @@
+{
+  "answer": "For a player with tennis elbow, both the Northcourt Meridian 14 and the Selkirk AMPED S2 offer features that could help reduce discomfort, but the Northcourt Meridian 14 may have an edge in vibration dampening:\n\n- **Northcourt Meridian 14**\n  - **Face Material:** Woven basalt fiber, which damps vibration more than carbon or fiberglass, making it particularly suitable for players recovering from tennis elbow.\n  - **Core:** 14 mm polypropylene honeycomb.\n  - **Weight:** 7.9 oz.\n  - **Shape:** Hybrid shape balances reach with a forgiving sweet spot.\n\n- **Selkirk AMPED S2**\n  - **Face Material:** FiberFlex fiberglass, which provides a responsive feel and consistent ball placement.\n  - **Core:** X5 polypropylene honeycomb to absorb vibration.\n  - **Weight:** 7.8 oz.\n  - **Shape:** Widebody shape for a larger surface area.\n\nBoth paddles have polypropylene honeycomb cores designed to absorb vibration, but the Northcourt Meridian 14's unique basalt-fiber face is specifically noted for superior vibration dampening, which may be more beneficial for someone dealing with tennis elbow.",
+  "sources": [
+    {
+      "doc_id": "prod_031_northcourt_meridian_14",
+      "chunk_text": "Northcourt Meridian 14\n\nThe Northcourt Meridian 14 is a control-first paddle built around a basalt-fiber face, a material that damps vibration more than carbon or fiberglass and suits players recovering from tennis elbow. A 14 mm polypropylene honeycomb core keeps the feel soft at the kitchen line, and the hybrid shape balances reach with a forgiving sweet spot.\n\nPrice: $149.99 USD\n\nSpecifications:\n  weight: 7.9 oz\n  grip_size: 4.25 in\n  face_material: Woven basalt fiber\n  core: 14 mm polypropylene honeycomb\n  shape: hybrid\n  length: 16.0 in\n  width: 7.75 in\n  handle_length: 5.25 in\n\nCare instructions: Wipe the basalt face with a damp cloth after play and let it air dry. Avoid solvents, and store the paddle in a cover away from direct heat.",
+      "similarity_score": 0.5748143630756303
+    },
+    {
+      "doc_id": "prod_001",
+      "chunk_text": "Selkirk AMPED S2\n\nThe Selkirk AMPED S2 delivers a balanced blend of power and control, making it an excellent choice for intermediate players looking to elevate their game. Its FiberFlex fiberglass face provides a responsive feel with consistent ball placement, while the X5 polypropylene honeycomb core absorbs vibration for comfortable extended play.\n\nPrice: $129.99 USD\n\nSpecifications:\n  weight: 7.8 oz\n  grip_size: 4.25 in\n  face_material: FiberFlex fiberglass\n  core: X5 polypropylene honeycomb\n  shape: widebody\n  length: 15.75 in\n  width: 8.0 in\n\nCare instructions: Wipe the paddle face with a damp cloth after play to remove ball residue. Avoid leaving the paddle in direct sunlight or extreme heat, as this can warp the core. Store in a paddle cover when not in use.",
+      "similarity_score": 0.5098622759929347
+    },
+    {
+      "doc_id": "prod_005",
+      "chunk_text": "HEAD Radical Tour\n\nThe HEAD Radical Tour brings tennis engineering expertise to the court. Featuring an Extreme Spin Texture (EST) face and an Optimized Tubular Construction (OTC) frame, this paddle delivers consistent power from edge to edge with a generous sweet spot suited to all-court players.\n\nPrice: $149.99 USD\n\nSpecifications:\n  weight: 8.1 oz\n  grip_size: 4.25 in\n  face_material: Extreme Spin Texture (EST) composite\n  core: Polypropylene honeycomb\n  shape: standard\n  length: 15.875 in\n  width: 7.875 in\n\nCare instructions: Wipe with a clean damp cloth. Inspect the edge guard periodically for cracks and replace if damaged to protect the core. Store away from moisture.",
+      "similarity_score": 0.4252775615300166
+    },
+    {
+      "doc_id": "prod_033_northcourt_trailhead_pack",
+      "chunk_text": "Northcourt Trailhead Pack\n\nThe Northcourt Trailhead Pack is a 24-liter backpack for players who ride to the courts. A vented shoe tunnel keeps court shoes away from clean clothes, a fleece-lined paddle sleeve holds two paddles, and a roll-out rain cover stows in the base for wet commutes.\n\nPrice: $84.99 USD\n\nSpecifications:\n  type: backpack\n  capacity: 24 L\n  paddle_capacity: 2\n  material: 600D recycled polyester\n  features: vented shoe tunnel, fleece-lined paddle sleeve, roll-out rain cover\n\nCare instructions: Spot clean with mild soap and water and air dry with the shoe tunnel unzipped. Do not machine wash.",
+      "similarity_score": 0.4046415266166683
+    },
+    {
+      "doc_id": "prod_035_northcourt_edgeguard_kit",
+      "chunk_text": "Northcourt EdgeGuard Repair Kit\n\nThe Northcourt EdgeGuard Repair Kit extends the life of a chipped paddle. It includes three adhesive edge-guard strips, a two-part clear epoxy for sealing small edge cracks, and an alcohol prep pad, enough for two full paddle repairs. Note that added tape changes paddle weight by roughly 0.1 oz.\n\nPrice: $12.99 USD\n\nSpecifications:\n  type: Paddle edge repair kit\n  contents: 3 edge-guard strips, 2-part clear epoxy, alcohol prep pad\n  repairs_per_kit: 2\n  added_weight: about 0.1 oz\n  cure_time: 24 hours\n\nCare instructions: Clean the edge with the prep pad before applying. Let epoxy cure for 24 hours before play, and store the sealed kit in a cool, dry place.",
+      "similarity_score": 0.39187874361918296
+    }
+  ],
+  "confidence": 0.46129489416688657,
+  "model": "gpt-4o",
+  "tokens": {
+    "prompt_tokens": 1309,
+    "completion_tokens": 241
+  },
+  "cost_usd": 0.0056825,
+  "cached": false,
+  "trace_id": "80f4f5981d234e205c32d207aa9aacd3",
+  "blocked_by": null
+}

@@ -1,0 +1,18 @@
+# Trace `80f4f5981d234e205c32d207aa9aacd3`
+
+Question: Compare the Northcourt Meridian 14 and the Selkirk AMPED S2 for a player with tennis elbow.
+
+Complete request (`query_request`): 10504.9 ms
+
+| Stage | Duration (ms) | Share of request | Prompt tok | Compl. tok |
+|---|---:|---:|---:|---:|
+| input_guards | 485.7 | 4.6% | 0 | 0 |
+| cache_lookup | 1033.5 | 9.8% | 0 | 0 |
+| classification | 1553.2 | 14.8% | 0 | 0 |
+| rag_retrieval | 599.9 | 5.7% | 0 | 0 |
+| rag_generation | 3534.9 | 33.7% | 1309 | 241 |
+| output_guards | 2106.1 | 20.0% | 0 | 0 |
+| cache_store | 1160.5 | 11.0% | 0 | 0 |
+
+Slowest stage: rag_generation (3534.9 ms, 33.7% of the complete request)
+

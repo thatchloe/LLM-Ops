@@ -1,6 +1,0 @@
-[ ] cached_route_query — repeat query within TTL returns cached=true (verify entries via `chromadb.PersistentClient(path='data/chroma').get_or_create_collection('cache').count()`)
-
-======================================================================
-Automated: 4 passed, 0 failed
-Manual: 12 items to verify in a real environment
-======================================================================

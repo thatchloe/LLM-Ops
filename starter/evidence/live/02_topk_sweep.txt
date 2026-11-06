@@ -1,0 +1,7 @@
+# scripts/eval_topk_sweep.py --topks=<k> --max-workers=1, one depth per run, same golden set
+
+| top_k | faithfulness | answer_relevancy | context_recall | context_precision |
+|-------|--------------|------------------|----------------|-------------------|
+| 3 | 0.865 | 0.794 | 0.828 | 0.717 |
+| 5 | 0.853 | 0.868 | 0.856 | 0.741 |
+| 10 | 0.889 | 0.851 | 0.894 | 0.708 |
